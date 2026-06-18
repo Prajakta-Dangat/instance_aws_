@@ -1,0 +1,42 @@
+name: EC2-pipeline
+
+on:
+  push:
+   - branches: main
+
+env:
+   aws_region:"ap-south-1"
+
+jobs:
+ terraform:
+   runs-on: ubuntu-latest
+
+   steps:
+    - name: checkout folder
+      uses: actions/checkout@v4
+
+    - name: authentication
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+       aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+       aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+       aws-region: ${{ env.AWS_REGION }}
+
+    - name: terraform install
+      uses: hashicorp/setup-terraform@v3
+
+    - name: tf.init
+      run: terraform init
+
+    - name: tf.plan
+      run: terraform plan -out=tfplan
+      
+    - name: tf.apply
+      run: terraform apply -auto-approve tfplan
+
+
+
+
+
+      
+      
