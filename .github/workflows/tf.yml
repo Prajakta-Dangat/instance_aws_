@@ -2,10 +2,10 @@ name: EC2-pipeline
 
 on:
   push:
-   - branches: main
+    branches: main
 
 env:
-   aws_region:"ap-south-1"
+   AWS_REGION: "ap-south-1"
 
 jobs:
  terraform:
