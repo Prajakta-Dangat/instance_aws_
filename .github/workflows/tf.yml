@@ -1,17 +1,19 @@
-name: EC2-pipeline
+#A Workflow is the complete automation process. It is written in a YAML file
 
-on:
+name: EC2-pipeline
+#An Event is the action that starts the workflow.
+on:     
   push:
     branches: main
 
 env:
    AWS_REGION: "ap-south-1"
 
-jobs:
+jobs:       #A Job is a group of related steps. #One workflow can have multiple jobs
  terraform:
-   runs-on: ubuntu-latest
+   runs-on: ubuntu-latest   #A Runner is the machine that executes your jobs.
 
-   steps:
+   steps:    #A Step is a single task inside a job
     - name: checkout folder
       uses: actions/checkout@v4
 
